@@ -89,3 +89,8 @@ https://<API_GATEWAY_INVOKE_URL>/posts/posts/{id}
 ```bash
 curl -X DELETE https://<API_GATEWAY_INVOKE_URL>/posts/posts/{id}
 ```
+## Cleanup
+Run a terraform destroy command
+```bash
+terraform destroy
+```
