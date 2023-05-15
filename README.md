@@ -34,6 +34,7 @@ Install python requirements
 cd terraform/backend
 pip install -r requirements.txt -t .
 ```
+![pip_install.png](images%2Fpip_install.png)
 Initialize Terraform
 ```bash
 cd .. #into terraform directory
@@ -43,11 +44,13 @@ Run and save a plan
 ```bash
 terraform plan -out=plan.out
 ```
+![tf_plan.png](images%2Ftf_plan.png)
 And then apply it
 ```bash
 terraform apply plan.out
 ```
-
+Read the outputs
+![outputs.png](images%2Foutputs.png)
 ## Go to URL
 https://blog.<YOUR_DOMAIN>
 

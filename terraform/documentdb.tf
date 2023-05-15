@@ -30,7 +30,7 @@ resource "aws_docdb_cluster_instance" "documentdb" {
 resource "aws_docdb_cluster_parameter_group" "documentdb" {
   name        = local.environment
   description = "${local.environment} DocumentDB cluster parameter group"
-  family      = "docdb5.0"
+  family      = "docdb4.0"
 
   tags = var.tags
 }
@@ -43,7 +43,7 @@ resource "aws_docdb_subnet_group" "documentdb" {
 }
 
 resource "aws_secretsmanager_secret" "documentdb" {
-  name                    = "${local.environment}-credentials"
+  name                    = "${local.environment}-credentials-${random_string.unique.result}"
   description             = "${local.environment} DocumentDB credentials"
   recovery_window_in_days = "7"
   tags                    = var.tags
@@ -74,16 +74,6 @@ resource "aws_security_group" "documentdb" {
   tags        = var.tags
 }
 
-resource "aws_security_group_rule" "documentdb_egress" {
-  type              = "egress"
-  description       = "Allow all egress traffic"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.documentdb.id
-}
-
 resource "aws_security_group_rule" "documentdb_app_ingress" {
   type              = "ingress"
   description       = "Allow inbound traffic from VPC CIDR"
@@ -95,7 +85,22 @@ resource "aws_security_group_rule" "documentdb_app_ingress" {
   cidr_blocks = [module.vpc.vpc_cidr_block]
 }
 
+resource "aws_security_group_rule" "documentdb_egress" {
+  type              = "egress"
+  description       = "Allow all egress traffic"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.documentdb.id
+}
+
 resource "random_string" "password" {
   length  = 16
+  special = false
+}
+
+resource "random_string" "unique" {
+  length  = 4
   special = false
 }
