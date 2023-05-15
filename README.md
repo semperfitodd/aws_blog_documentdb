@@ -1,5 +1,13 @@
 # AWS Blog application using a CRUD Lambda and DocumentDB
 
+This is an application designed to demonstrate how to build a blog using AWS services including Lambda, DocumentDB, API Gateway, S3, CloudFront, and Route53. The backend of the application is built on a serverless architecture using AWS Lambda, which interacts with a DocumentDB cluster to perform CRUD (Create, Read, Update, Delete) operations. The frontend is hosted on S3 and delivered using CloudFront.
+
+## Prerequisites
+
+* AWS account with necessary permissions to create and manage the required resources
+* AWS CLI installed and configured
+* Terraform installed
+
 ## What is being created
 * VPC and VPC Endpoints
 * DocumentDB (MongoDB compatible) cluster
@@ -9,20 +17,34 @@
 * index.html as an object in S3
 * DNS in Route53
 
-## How to setup
-Update locals.tf with desired declarations
+## Configuration
+Before you run the Terraform commands, you need to update a few configuration values. Open the variables.tf file (assuming it exists) and set the following:
 
+* environment: This value represents the environment in which you're deploying the application (for example, "dev", "staging", or "prod"). Replace it with the appropriate value for your situation.
+
+* public_domain: This is the domain where your application will be hosted. Replace it with your domain.
+
+## How to setup
 It will take about 10 minutes for the terraform to run.
 
 Please note: It takes a little extra time for the CDN to become ready after the terraform runs
+
+Install python requirements 
 ```bash
 cd terraform/backend
 pip install -r requirements.txt -t .
-
+```
+Initialize Terraform
+```bash
 cd .. #into terraform directory
-
 terraform init
+```
+Run and save a plan
+```bash
 terraform plan -out=plan.out
+```
+And then apply it
+```bash
 terraform apply plan.out
 ```
 

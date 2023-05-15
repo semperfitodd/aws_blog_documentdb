@@ -4,7 +4,7 @@ resource "aws_docdb_cluster" "documentdb" {
   cluster_identifier              = "${local.environment}-cluster"
   db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.documentdb.name
   db_subnet_group_name            = aws_docdb_subnet_group.documentdb.name
-  deletion_protection             = true
+  deletion_protection             = false
   enabled_cloudwatch_logs_exports = ["profiler"]
   master_password                 = random_string.password.result
   master_username                 = "administrator"

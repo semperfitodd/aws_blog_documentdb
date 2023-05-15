@@ -51,7 +51,7 @@ resource "aws_api_gateway_integration_response" "posts_options" {
   status_code = "200"
 
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Origin"  = "'*'" #"'${each.key}'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'${each.key}'"
     "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,PUT,DELETE,OPTIONS'"
     "method.response.header.Access-Control-Allow-Headers" = "'${join(",", each.value.allowed_headers)}'"
   }
