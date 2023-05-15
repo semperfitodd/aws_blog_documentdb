@@ -94,3 +94,4 @@ Run a terraform destroy command
 ```bash
 terraform destroy
 ```
+![tf_destroy.png](images%2Ftf_destroy.png)
