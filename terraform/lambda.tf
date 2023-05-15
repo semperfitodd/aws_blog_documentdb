@@ -4,12 +4,6 @@ data "archive_file" "backend" {
   type        = "zip"
 }
 
-data "archive_file" "frontend" {
-  source_file = "${path.module}/frontend/frontend.py"
-  output_path = "frontend.zip"
-  type        = "zip"
-}
-
 data "aws_iam_policy" "AWSLambdaBasicExecutionRole" {
   name = "AWSLambdaBasicExecutionRole"
 }
@@ -71,6 +65,7 @@ resource "aws_iam_role_policy_attachment" "lambda_secret_policy" {
 }
 
 resource "aws_lambda_function" "backend" {
+  description   = "Backend Lambda function to communicate between the API gateway and DocumentDB for the ${var.environment} environment."
   filename      = "backend.zip"
   function_name = "${var.environment}_backend"
   handler       = "backend.handler"
@@ -91,18 +86,6 @@ resource "aws_lambda_function" "backend" {
   }
 
   source_code_hash = data.archive_file.backend.output_base64sha256
-
-  tags = var.tags
-}
-
-resource "aws_lambda_function" "frontend" {
-  filename      = "frontend.zip"
-  function_name = "${var.environment}_frontend"
-  role          = aws_iam_role.lambda_execution_role.arn
-  handler       = "frontend.lambda_handler"
-  runtime       = "python3.9"
-
-  source_code_hash = data.archive_file.frontend.output_base64sha256
 
   tags = var.tags
 }

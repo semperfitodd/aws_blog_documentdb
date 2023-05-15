@@ -16,6 +16,14 @@ backend.tf
 plan.out
 *.zip
 
+# python library files
+terraform/backend/bson/
+terraform/backend/dns/
+terraform/backend/dnspython-*.dist-info/
+terraform/backend/gridfs/
+terraform/backend/pymongo-*.dist-info/
+terraform/backend/pymongo/
+
 .idea
 .iml
 
