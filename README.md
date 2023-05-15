@@ -11,10 +11,12 @@ This is an application designed to demonstrate how to build a blog using AWS ser
 ## What is being created
 * VPC and VPC Endpoints
 * DocumentDB (MongoDB compatible) cluster
+* AWS Secret with username and password for cluster
 * Backend Lambda Function
 * API Gateway
 * Frontend in S3/CloudFront
 * index.html as an object in S3
+* ACM Certificate
 * DNS in Route53
 
 ## Configuration
