@@ -1,5 +1,5 @@
 # AWS Blog application using a CRUD Lambda and DocumentDB
-
+![architecture.png](images%2Farchitecture.png)
 This is an application designed to demonstrate how to build a blog using AWS services including Lambda, DocumentDB, API Gateway, S3, CloudFront, and Route53. The backend of the application is built on a serverless architecture using AWS Lambda, which interacts with a DocumentDB cluster to perform CRUD (Create, Read, Update, Delete) operations. The frontend is hosted on S3 and delivered using CloudFront.
 
 ## Prerequisites
