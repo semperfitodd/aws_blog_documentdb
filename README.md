@@ -60,7 +60,13 @@ Please note: If you build your CloudFront distribution anywhere other than us-ea
 
 To test when this starts working simply run this command in bash
 ```bash
-while ! curl -Is https://blog.<YOUR_DOMAIN> | head -n 1 | grep -q "200"; do sleep 5; done
+while true; do
+  if curl -Is https://blog.<YOUR_DOMAIN> | head -n 1 | grep -q "200"; then
+    break
+  fi
+  sleep 5
+done
+
 ```
 Get will load all messages each time the page loads.
 
